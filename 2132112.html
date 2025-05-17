@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Xscape Studio｜诸元数智 · 创意成长实验室</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* --- Variables --- */
+    :root {
+      --brand: #ff42c7;
+      --brand2: #7928ca;
+      --accent: #ffe98f; /* Added an accent color */
+      --gray: #bababa;
+      --bg-grad: linear-gradient(120deg, #ff42c7 0%, #7928ca 100%);
+      --dark: #19182a;
+      --light: #fff;
+      --radius: 2.5rem; /* Slightly more rounded */
+      --section-bg: rgba(32, 32, 50, 0.92); /* Slightly more opaque */
+      --header-bg: rgba(24, 24, 45, 0.99); /* Almost fully opaque */
+      --footer-color: #a09beb;
+      --card-bg: rgba(40, 40, 65, 0.85); /* More opaque */
+      --border-color: rgba(121, 40, 202, 0.7); /* More visible border color */
+      --header-height: 80px; /* Define a height for the header */
+      --mobile-nav-width: 280px; /* Width of the mobile slide-out nav */
+    }
+
+    /* --- Base Styles --- */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #16152c;
+      color: var(--light);
+      font-family: 'Roboto', '微软雅黑', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7; /* Increased line height */
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      position: relative; /* Needed for background effects */
+    }
+
+     /* Subtle background particle effect */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgODAwIDgwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0icmFkPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmY0MmMyIiBzdG9wLW9wYWNpdHk9IjAuMDYiPjwvc3RvcPgKICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNzkyOGNhIiBzdG9wLW9wYWNpdHk9IjAuMDYiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjQwMCIgcj0iNDAwIiBmaWxsPSJ1cmwoI3JhZCkiLz4KPC9zdmc+') no-repeat center center fixed;
+        background-size: cover;
+        opacity: 0.1; /* Adjusted opacity */
+        z-index: -1; /* Send to back */
+        animation: subtle-zoom 15s ease-in-out infinite alternate; /* Adjusted duration */
+    }
+
+    @keyframes subtle-zoom {
+        from { background-size: 100% 100%; }
+        to { background-size: 140% 140%; } /* Increased zoom effect */
+    }
+
+
+    a,
+    button {
+      transition: box-shadow .3s ease, background .3s ease, color .3s ease, transform .3s ease;
+      text-decoration: none;
+    }
+
+    button:active,
+    a:active {
+      transform: scale(.95); /* Slightly less scale down */
+    }
+
+    button:hover,
+    a:hover {
+      box-shadow: 0 8px 30px rgba(255, 66, 199, 0.8); /* More prominent shadow on hover */
+      color: var(--brand);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Archivo Black', sans-serif;
+      color: var(--brand); /* Use brand color for headings */
+      margin-bottom: 0.8em;
+      letter-spacing: 1.5px; /* Increased letter spacing */
+      text-transform: uppercase; /* Uppercase for a pioneer feel */
+      text-shadow: 0 0 10px rgba(255, 66, 199, 0.3); /* Text shadow */
+    }
+
+    h2 {
+      font-size: 2.8em; /* Larger h2 */
+      text-align: center; /* Center section titles */
+      margin-bottom: 2em; /* Increased margin */
+    }
+
+     h3 {
+         font-size: 2em; /* Larger h3 */
+         margin-bottom: 1.2em;
+     }
+
+
+    ul {
+      padding-left: 1.5em;
+    }
+
+    li {
+      margin-bottom: 0.9em; /* Increased margin */
+      line-height: 1.8;
+    }
+
+    /* --- Header (Fixed at Top, Apple-like) --- */
+    header {
+      width: 100vw;
+      position: fixed; /* Fixed at the top */
+      top: 0;
+      left: 0;
+      z-index: 99;
+      background: var(--header-bg);
+      box-shadow: 0 6px 30px rgba(255, 66, 199, 0.8); /* Shadow pointing downwards */
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between logo and nav/hamburger */
+      padding: 0 3vw; /* Adjusted padding */
+      height: var(--header-height); /* Use defined height */
+      font-family: 'Archivo Black', sans-serif;
+      letter-spacing: 1.5px;
+      border-bottom: 2px solid var(--border-color); /* Thicker border */
+      backdrop-filter: blur(15px); /* Stronger blur effect */
+    }
+
+    .logo {
+      color: var(--brand);
+      font-size: 2rem; /* Adjusted logo size */
+      cursor: pointer;
+      text-shadow: 0 0 15px rgba(255, 66, 199, 0.7); /* More prominent text shadow */
+      transition: transform 0.3s ease;
+      white-space: nowrap; /* Prevent wrapping */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+     .logo:hover {
+         transform: scale(1.08); /* Increased scale */
+     }
+
+
+    /* --- Navigation (Desktop) --- */
+    nav {
+      display: flex; /* Use flexbox for inline links */
+      flex-wrap: nowrap; /* Prevent wrapping */
+      justify-content: flex-end; /* Align links to the right */
+      align-items: center;
+      gap: 1.5em; /* Increased gap between links */
+      padding: 0; /* Remove padding from nav itself */
+      background: none; /* Remove background from nav itself */
+      border-radius: 0; /* Remove border-radius */
+      margin: 0; /* Remove margin */
+      max-width: calc(100% - 250px); /* Allow nav to take most of the width */
+      box-sizing: border-box;
+      z-index: 20;
+      box-shadow: none; /* Remove shadow */
+      border: none; /* Remove border */
+      height: 100%; /* Occupy full height of header */
+      transition: transform 0.4s ease-in-out; /* Animation for mobile toggle */
+    }
+
+    nav a {
+      display: inline-flex; /* Use inline-flex for better vertical alignment */
+      align-items: center;
+      justify-content: center;
+      color: var(--light);
+      font-size: 1.1rem; /* Slightly smaller font size */
+      padding: 0.8em 1.5em; /* Adjusted padding */
+      border-radius: 2.5em; /* More rounded corners */
+      background: none; /* Remove background */
+      font-weight: 700;
+      margin: 0; /* Remove margin on links, use gap on nav */
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: none;
+      outline: none;
+      letter-spacing: 0.05em;
+      position: relative;
+      text-transform: uppercase; /* Uppercase nav links */
+      height: calc(var(--header-height) - 30px); /* Make link height slightly less than header height */
+    }
+
+    nav a.active,
+    nav a:active {
+      background: linear-gradient(90deg, rgba(255, 66, 199, 0.5), rgba(121, 40, 202, 0.5)); /* Gradient active background */
+      color: var(--light);
+      box-shadow: 0 2px 10px rgba(161, 111, 255, 0.7); /* More subtle active shadow */
+      border: none; /* Remove border */
+    }
+
+    nav a:hover:not(.active) {
+      background: rgba(210, 157, 255, 0.3); /* More subtle hover background */
+      color: var(--accent); /* Hover color */
+    }
+
+    /* --- Hamburger Menu (Mobile) --- */
+    .hamburger {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        cursor: pointer;
+        z-index: 100; /* Above the nav */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .hamburger .line {
+        width: 100%;
+        height: 3px;
+        background-color: var(--brand); /* Hamburger color */
+        border-radius: 10px;
+        transition: all 0.3s linear;
+        position: relative;
+        transform-origin: 1px;
+    }
+
+    /* Hamburger animation */
+    .hamburger.open .line1 {
+        transform: rotate(45deg);
+    }
+    .hamburger.open .line2 {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    .hamburger.open .line3 {
+        transform: rotate(-45deg);
+    }
+
+    /* Overlay for mobile menu */
+    .mobile-overlay {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+        z-index: 90; /* Below nav, above content */
+         backdrop-filter: blur(5px); /* Subtle blur */
+    }
+
+
+    /* --- Main Content --- */
+    main {
+      padding-top: var(--header-height); /* Add padding top for fixed header */
+      max-width: 1400px; /* Increased max width */
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      box-sizing: border-box; /* Include padding in width */
+    }
+
+    section {
+      margin: 5em 0; /* Adjusted margin between sections */
+      border-radius: var(--radius);
+      background: var(--section-bg);
+      box-shadow: 0 10px 35px rgba(255, 66, 199, 0.7); /* More prominent section shadow */
+      padding: 5em; /* Adjusted padding */
+      backdrop-filter: blur(30px); /* Stronger blur effect */
+      transition: box-shadow .4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--border-color); /* Thicker section border */
+    }
+
+    section:hover {
+        box-shadow: 0 15px 50px rgba(255, 66, 199, 0.9); /* Increased shadow on hover */
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      left: 3%; /* Adjusted position */
+      top: -60px; /* Adjusted position */
+      width: 150px; /* Increased width */
+      height: 50px; /* Increased height */
+      background: linear-gradient(120deg, #ff42c7ee, #7928caee 92%);
+      border-radius: 3.5em; /* More rounded corners */
+      opacity: 0.7; /* More opaque */
+      z-index: 0;
+      filter: blur(10px); /* Increased blur */
+      transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+    }
+
+    section:hover::before {
+      opacity: 1; /* More opaque on hover */
+      filter: blur(4px); /* Reduced blur on hover */
+      transform: translateX(20px) translateY(-10px); /* Slight movement on hover */
+    }
+
+
+    /* --- Main Hero Section (Adjusted Size and Layout) --- */
+    .main-hero {
+      text-align: center;
+      min-height: 60vh; /* Reduced minimum height */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-top: 0; /* Remove top margin */
+    }
+
+    .hero-title {
+      font-size: 4rem; /* Further reduced title size */
+      background: var(--bg-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      margin-bottom: 0.1em; /* Further reduced margin */
+      letter-spacing: 3px; /* Adjusted letter spacing */
+      filter: drop-shadow(0 8px 30px rgba(255, 66, 199, 0.8)); /* More prominent shadow */
+      animation: text-pop-up 1.2s ease-out; /* Adjusted animation duration */
+      text-transform: uppercase;
+      line-height: 1.1; /* Adjusted line height */
+    }
+
+     /* Styling for the two lines of the main title */
+    .gta-title .line {
+        display: block; /* Make each line a block element */
+        margin-bottom: 0.05em; /* Reduced space between lines */
+    }
+
+    /* --- GTA Title Animation (New Animation) --- */
+    /* Removed gta-bounce and gta-flow */
+    .gta-title {
+      font-family: 'Archivo Black', 'Impact', 'Roboto', sans-serif;
+      font-size: 5rem; /* Further reduced GTA title size */
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0.05em; /* Adjusted letter spacing */
+      text-align: center;
+      margin: 0.6em 0 0.3em 0; /* Adjusted margin */
+      position: relative;
+      text-transform: uppercase;
+      perspective: 400px; /* Add perspective for 3D effect */
+    }
+
+    .gta-title span {
+      display: inline-block;
+      background: linear-gradient(90deg, #ff47a3 0%, #ffe98f 30%, #61d2fa 70%, #e88fff 100%); /* Adjusted gradient */
+      background-size: 200% 100%; /* Keep background horizontal */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      /* New Animation: Subtle wave/shimmer + reveal */
+      animation: text-shimmer 4s linear infinite, text-reveal 0.8s ease-out forwards;
+      will-change: transform, background-position, opacity;
+      padding: 0 .05em; /* Adjusted padding */
+      filter: drop-shadow(0 4px 20px rgba(255, 66, 199, 0.7)) drop-shadow(0 6px 15px rgba(161, 111, 255, 0.7)); /* Adjusted shadows */
+       opacity: 0; /* Start hidden for reveal animation */
+       transform: rotateX(-90deg); /* Start rotated for reveal */
+       transform-origin: bottom; /* Rotate from the bottom */
+    }
+
+     /* Animation delay applied by JavaScript */
+
+    /* Keyframes for the new animation */
+    @keyframes text-shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    @keyframes text-reveal {
+       0% { opacity: 0; transform: rotateX(-90deg); }
+       100% { opacity: 1; transform: rotateX(0deg); }
+    }
+
+
+    /* --- Section Icon Styles (Optimized for Mobile) --- */
+    .section-icon {
+      width: 140px; /* Adjusted size for desktop */
+      height: 140px; /* Adjusted size for desktop */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6em; /* Adjusted icon size for desktop */
+      border-radius: 3em; /* More rounded corners */
+      background: var(--bg-grad);
+      box-shadow: 0 8px 35px rgba(255, 66, 199, 0.9); /* More prominent shadow */
+      margin-bottom: 1.8em; /* Adjusted margin bottom */
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      flex-shrink: 0; /* Prevent shrinking on flex layouts */
+       border: 2px solid var(--accent); /* Accent border */
+    }
+
+    .section-icon:hover {
+      transform: rotate(18deg) scale(1.15); /* Increased rotation and scale on hover */
+      box-shadow: 0 10px 50px rgba(255, 66, 199, 1.2);
+    }
+
+    /* --- New Sections Styling --- */
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax */
+        gap: 2.5em; /* Adjusted gap */
+        margin-top: 2.5em;
+    }
+
+    .project-card, .blog-post-card, .join-card {
+        background: var(--card-bg);
+        border-radius: 2em; /* More rounded corners */
+        padding: 2.5em; /* Adjusted padding */
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* More prominent shadow */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+         border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle inner border */
+    }
+
+     .project-card:hover, .blog-post-card:hover, .join-card:hover {
+        transform: translateY(-12px); /* Lift on hover */
+        box-shadow: 0 10px 40px rgba(255, 66, 199, 0.8); /* Increased shadow */
+     }
+
+    .project-card img {
+        width: 100%;
+        height: 220px; /* Fixed image height */
+        object-fit: cover; /* Cover the area without distortion */
+        border-radius: 1em;
+        margin-bottom: 1.8em;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-card h3, .blog-post-card h3, .join-card h3 {
+        color: var(--accent); /* Use accent color for card titles */
+        margin-top: 0;
+        margin-bottom: 1em; /* Adjusted margin */
+        font-size: 1.6em; /* Adjusted title size */
+        text-transform: capitalize; /* Capitalize card titles */
+    }
+
+    .project-card p, .blog-post-card p, .join-card p {
+        color: #e2dcf2;
+        font-size: 1.1em; /* Adjusted text size */
+        line-height: 1.8;
+        flex-grow: 1; /* Allow text to grow */
+    }
+
+    .card-link {
+        display: inline-block;
+        margin-top: 2em; /* Adjusted margin */
+        padding: 1em 2.5em; /* Adjusted padding */
+        background: var(--brand);
+        color: var(--light);
+        border-radius: 2.5em; /* More rounded */
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(255, 66, 199, 0.8);
+        text-transform: uppercase;
+         transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-link:hover {
+        background: linear-gradient(90deg, var(--brand), var(--brand2));
+        box-shadow: 8px 25px rgba(255, 66, 199, 1);
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax */
+        gap: 2.5em;
+        margin-top: 2.5em;
+    }
+
+    .blog-post-card .date {
+        font-size: 1em; /* Slightly larger date */
+        color: var(--gray);
+        margin-bottom: 1.2em;
+    }
+
+    .join-card img {
+         width: 180px; /* Adjusted size */
+         height: auto;
+         margin-bottom: 2em; /* Adjusted margin */
+         filter: drop-shadow(0 6px 20px rgba(255, 233, 143, 0.9)); /* More prominent shadow */
+    }
+
+    /* --- Quotes Section (Adjusted) --- */
+    #quotes { text-align: center; }
+
+    #quoteBox {
+      margin: 3em auto 0 auto; /* Adjusted margin */
+      font-size: 1.4em; /* Adjusted font size */
+      color: var(--light);
+      max-width: 900px; /* Adjusted max width */
+      min-height: 5.5em; /* Adjusted min height */
+      background: rgba(32, 23, 55, 0.9); /* More opaque background */
+      border-radius: 3em; /* More rounded corners */
+      padding: 2.5em 3.5em; /* Adjusted padding */
+      box-shadow: 0 6px 25px rgba(121, 40, 202, 0.8); /* More prominent shadow */
+      transition: opacity .6s ease; /* Adjusted duration */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-style: italic;
+      border: 2px solid var(--border-color);
+    }
+
+    #quoteBox i {
+      display: block;
+      line-height: 1.8;
+    }
+
+    #quotes button {
+      margin-top: 2.5em; /* Adjusted margin top */
+      font-size: 1.2em; /* Adjusted font size */
+      background: var(--brand);
+      color: var(--light);
+      border: none;
+      border-radius: 2.5em; /* More rounded corners */
+      padding: 1.2em 3em; /* Adjusted padding */
+      box-shadow: 0 6px 20px rgba(255, 66, 199, 1); /* More prominent shadow */
+      cursor: pointer;
+      text-transform: uppercase;
+       transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #quotes button:hover {
+      background: linear-gradient(120deg, #ff42c7, #7928ca); /* Gradient on hover */
+      box-shadow: 0 10px 30px rgba(255, 66, 199, 1.2); /* Stronger shadow on hover */
+    }
+
+    .quote-fade {
+        opacity: 0;
+        transition: opacity 0.4s ease-out;
+    }
+
+
+    /* --- Contact Section (Adjusted) --- */
+    #contact {
+        text-align: center;
+    }
+    #contact .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 4em; /* Adjusted gap */
+      flex-wrap: wrap;
+      margin-top: 3em; /* Adjusted margin top */
+    }
+
+    #contact .contact-item {
+      text-align: center;
+      font-size: 1.3em; /* Adjusted font size */
+      color: #e9e9ff;
+    }
+
+    #contact .contact-item div:first-child {
+      font-size: 3.5em; /* Adjusted icon size */
+      margin-bottom: 0.5em;
+      color: var(--accent); /* Use accent color for contact icons */
+      transition: transform 0.4s ease;
+    }
+     #contact .contact-item div:first-child:hover {
+         transform: scale(1.2) rotate(15deg); /* More pronounced effect */
+     }
+
+    #contact .contact-item div:nth-child(2) {
+      color: var(--brand);
+      font-weight: bold;
+      margin-bottom: 0.4em;
+      text-transform: uppercase;
+    }
+
+    #contact .contact-message {
+      margin-top: 4em; /* Adjusted margin top */
+      font-size: 1.2em; /* Adjusted font size */
+      color: #b0c6ff;
+      font-style: italic;
+      line-height: 1.9;
+    }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: 5em; /* Adjusted margin top */
+      padding: 3em 0 1.5em 0; /* Adjusted padding */
+      text-align: center;
+      color: var(--footer-color);
+      font-size: 1em; /* Adjusted size */
+      border-top: 2px solid var(--border-color); /* Thicker border */
+      line-height: 1.8;
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(80px); /* Adjusted initial translateY */
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes text-pop-up {
+      0% {
+        opacity: 0;
+        transform: scale(0.6); /* Adjusted initial scale */
+      }
+      75% {
+        transform: scale(1.04); /* Adjusted pop scale */
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px); /* Adjusted float distance */
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* Scroll Animation (using Intersection Observer) */
+    .hidden {
+        opacity: 0;
+        transform: translateY(80px); /* Adjusted initial translateY */
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* Adjusted duration */
+    }
+
+    .visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    /* --- Responsive Design --- */
+    @media (max-width: 1024px) {
+         header { height: var(--header-height); padding: 0 4vw; justify-content: space-between; }
+         .logo { font-size: 2.5rem; }
+         nav {
+             max-width: calc(100% - 200px); /* Adjusted max width */
+             gap: 1em; padding: 0; /* Remove padding */
+             margin-left: auto;
+             justify-content: flex-end; /* Align to the right */
+          }
+         nav a { font-size: 1rem; padding: 0.8em 1.5em; margin: 0; } /* Remove margin, use gap */
+         main { padding-top: var(--header-height); }
+
+         .gta-title { font-size: 6rem; letter-spacing: 4px;}
+         .hero-title { font-size: 4.5rem; letter-spacing: 3px;}
+         .hero-slogan { font-size: 1.3rem; }
+         section { padding: 4em; margin: 5em 0;}
+         h2 { font-size: 2.2em; }
+         h3 { font-size: 1.6em; }
+         .section-icon { width: 140px; height: 140px; font-size: 6em; }
+         .project-grid, .blog-grid { gap: 2em; }
+         .project-card, .blog-post-card, .join-card { padding: 2em; }
+         .project-card img { height: 200px; }
+         #quoteBox { font-size: 1.2em; padding: 2em 3em; min-height: 5em;}
+         #quotes button { font-size: 1.1em; padding: 1em 3em; }
+         #contact .contact-info { gap: 3em; }
+         #contact .contact-item div:first-child { font-size: 3em; }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: var(--header-height); /* Maintain height */
+        padding: 0 4vw;
+        flex-direction: row; /* Row layout on mobile */
+        align-items: center;
+        justify-content: space-between; /* Space between logo and hamburger */
+        border-bottom: 2px solid var(--border-color); /* Keep bottom border */
+      }
+
+      .logo {
+        font-size: 1.8rem; /* Adjusted size */
+        margin-bottom: 0; /* Remove margin */
+        text-align: left; /* Align left */
+        width: auto; /* Auto width */
+      }
+
+      nav {
+        position: fixed; /* Fixed position for slide-out */
+        top: 0;
+        right: - var(--mobile-nav-width); /* Start off-screen */
+        width: var(--mobile-nav-width); /* Set width */
+        height: 100vh; /* Full viewport height */
+        flex-direction: column; /* Stack links vertically */
+        justify-content: flex-start; /* Align links to the top */
+        align-items: flex-start; /* Align links to the left */
+        padding: calc(var(--header-height) + 20px) 20px 20px 20px; /* Padding for content below header */
+        background: var(--header-bg); /* Background for slide-out */
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5); /* Shadow on the left */
+        border-left: 1px solid var(--border-color); /* Border on the left */
+        gap: 1.5em; /* Gap between stacked links */
+        transition: transform 0.4s ease-in-out; /* Animation */
+        flex-wrap: nowrap; /* Prevent wrapping */
+        display: none; /* Hide by default */
+      }
+
+      nav.open {
+        transform: translateX(- var(--mobile-nav-width)); /* Slide in */
+        display: flex; /* Show when open */
+      }
+
+      nav a {
+        width: 100%; /* Full width of the nav container */
+        padding: 1em 0; /* Adjusted padding */
+        margin: 0; /* Remove margin */
+        justify-content: flex-start; /* Align text to the left */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+         border-radius: 0; /* Remove border radius on mobile nav links */
+         background: none; /* Remove background from links */
+         height: auto; /* Auto height */
+      }
+       nav a:last-child { border-bottom: none; } /* No border for the last link */
+
+       nav a.active, nav a:active {
+           background: none; /* No background gradient */
+           color: var(--brand); /* Highlight color */
+           box-shadow: none; /* Remove shadow */
+       }
+        nav a:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.08); /* Subtle hover background */
+            color: var(--light); /* Keep text color light on hover */
+        }
+
+
+      .hamburger {
+          display: flex; /* Show hamburger */
+      }
+
+      main {
+        padding-top: var(--header-height); /* Keep padding top */
+        padding-bottom: 0; /* Remove padding bottom */
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      section {
+        padding: 3em 2em; /* Adjusted padding */
+        margin: 4em 0;
+      }
+
+      h2 { font-size: 2em; }
+      h3 { font-size: 1.5em; }
+
+
+      .hero-title {
+        font-size: 3rem; /* Reduced size */
+        letter-spacing: 2px;
+      }
+
+      .hero-slogan {
+        font-size: 1.1em;
+        margin: 1em auto 2.5em; /* Adjusted margin */
+      }
+
+      .gta-title {
+        font-size: 4rem; /* Reduced size */
+        letter-spacing: 2px;
+      }
+
+      .section-icon {
+        width: 100px; /* Reduced size */
+        height: 100px; /* Reduced size */
+        font-size: 4em; /* Reduced font size */
+      }
+
+      .project-grid, .blog-grid {
+          grid-template-columns: 1fr; /* Stack cards on small screens */
+      }
+
+      .project-card img { height: 180px; } /* Adjusted height */
+
+
+      #quoteBox {
+        font-size: 1.1em;
+        padding: 1.5em 2em; /* Adjusted padding */
+        min-height: 4em;
+      }
+
+      #quotes button {
+        font-size: 1em;
+        padding: 0.8em 2.5em;
+      }
+
+      #contact .contact-info {
+        gap: 2em;
+      }
+
+      #contact .contact-item div:first-child {
+        font-size: 2.5em;
+      }
+       footer { padding: 2.5em 0 1.2em 0; }
+    }
+
+    @media (max-width: 480px) {
+       header { padding: 0 3vw; }
+       .logo { font-size: 1.5rem; }
+       .hamburger { width: 25px; height: 20px; }
+       .hamburger .line { height: 2px; }
+       nav { width: var(--mobile-nav-width); right: - var(--mobile-nav-width); }
+       nav.open { transform: translateX(- var(--mobile-nav-width)); }
+       nav a { font-size: 0.9em; padding: 0.8em 0; }
+
+
+      main {
+        padding-top: var(--header-height); /* Keep padding top */
+        padding-bottom: 0; /* Remove padding bottom */
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      section {
+        padding: 2em 1em;
+        margin: 3em 0;
+      }
+       h2 { font-size: 1.8em; }
+       h3 { font-size: 1.4em; }
+
+      .hero-title {
+        font-size: 2.2rem; /* Further reduced size */
+        letter-spacing: 2px;
+      }
+
+      .hero-slogan {
+        font-size: 1em;
+         margin: 0.8em auto 2em; /* Adjusted margin */
+      }
+
+      .gta-title {
+        font-size: 3rem;
+        letter-spacing: 2px;
+      }
+
+       .section-icon {
+           width: 80px; /* Further reduced size */
+           height: 80px; /* Further reduced size */
+           font-size: 3.5em; /* Further reduced font size */
+        }
+
+       .project-card img { height: 150px; } /* Further reduced height */
+       .project-card, .blog-post-card, .join-card { padding: 1.5em; }
+       .project-card h3, .blog-post-card h3, .join-card h3 { font-size: 1.3em; }
+       .project-card p, .blog-post-card p, .join-card p { font-size: 1em; }
+
+
+       #quoteBox { font-size: 1em; padding: 1em 1.5em; min-height: 3.5em; }
+       #quotes button { font-size: 0.9em; padding: 0.6em 2em; }
+       #contact .contact-info { gap: 1.5em; }
+       #contact .contact-item div:first-child { font-size: 2.2em; }
+        .contact-info { gap: 1em; }
+         footer { padding: 2em 0 1em 0; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Mobile Navigation Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+    const mobileOverlay = document.createElement('div'); // Create overlay element
+    mobileOverlay.classList.add('mobile-overlay');
+    document.body.appendChild(mobileOverlay); // Add overlay to the body
+
+    function toggleMobileMenu() {
+         hamburger.classList.toggle('open');
+         nav.classList.toggle('open');
+         mobileOverlay.style.display = nav.classList.contains('open') ? 'block' : 'none'; // Show/hide overlay
+          // Prevent scrolling when mobile nav is open
+         document.body.style.overflowY = nav.classList.contains('open') ? 'hidden' : 'auto';
+    }
+
+    hamburger.addEventListener('click', toggleMobileMenu);
+
+    // Close mobile nav when a link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (nav.classList.contains('open')) {
+                toggleMobileMenu(); // Use the toggle function to close
+            }
+        });
+    });
+
+    // Close mobile nav when clicking outside the nav
+    mobileOverlay.addEventListener('click', toggleMobileMenu);
+
+
+    // Activate anchor navigation
+    const navLinks = document.querySelectorAll("nav a"); // Renamed variable
+    navLinks.forEach(a=>{
+      a.onclick = function(e) {
+        navLinks.forEach(n=>n.classList.remove("active"));
+        this.classList.add("active");
+        const id = this.getAttribute("href").replace("#","");
+         const targetElement = document.getElementById(id);
+        if (targetElement) {
+             const headerHeight = document.querySelector('header').offsetHeight;
+             const elementPosition = targetElement.getBoundingClientRect().top;
+             const offsetPosition = elementPosition + window.scrollY - headerHeight; // Scroll to element minus header height
+
+             window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+             });
+        }
+        e.preventDefault();
+      }
+    });
+
+    // Highlight active nav item on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const headerHeight = document.querySelector('header').offsetHeight;
+      document.querySelectorAll('section').forEach(section => {
+        // Adjusted offset for the fixed top header
+        const sectionTop = section.offsetTop - headerHeight - 50; // Offset by header height and some extra padding
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY > 0 && scrollY < sectionTop + sectionHeight) { // Add scrollY > 0 check
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(a => { // Using the renamed variable
+        a.classList.remove('active');
+        if (a.getAttribute('href').includes(current)) {
+          a.classList.add('active');
+        } else if (current === '' && window.scrollY === 0 && a.getAttribute('href').includes('#home')) {
+             // Handle highlighting '首页' when at the very top
+             a.classList.add('active');
+        }
+      });
+    });
+
+
+    // Scroll animation observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                 // Optional: remove 'visible' when out of view
+                 // entry.target.classList.remove('visible');
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger when 10% of the element is in view (adjusted)
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+         // Apply hidden class to elements that should animate on scroll
+         document.querySelectorAll('section, .project-card, .blog-post-card, .join-card').forEach((el) => {
+             el.classList.add('hidden');
+             observer.observe(el);
+         });
+
+        // Initialize GTA title animation (letter by letter)
+        document.querySelectorAll('.gta-title').forEach(function(t) {
+            let html = '';
+            let idx = 0;
+            // Process each line span separately
+            t.querySelectorAll('.line').forEach(lineSpan => {
+                 [...lineSpan.textContent].forEach(function(c) {
+                  if (c === ' ') {
+                    html += '&nbsp;';
+                  } else {
+                    // Apply text-reveal animation delay here
+                    html += `<span style="animation-delay:${0.03*idx}s">${c}</span>`; // Adjusted delay for reveal
+                    idx++;
+                  }
+                });
+                html += '<br>'; // Add break after each line
+            });
+            // Remove the last <br>
+            if (html.endsWith('<br>')) {
+                html = html.slice(0, -4);
+            }
+            t.innerHTML = html;
+          });
+    });
+
+
+  </script>
+
+  <header>
+    <div class="logo">Xscape Studio</div>
+    <div class="hamburger">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+    </div>
+    <nav>
+      <a href="#home" class="active">首页</a>
+      <a href="#why">我们信仰</a>
+      <a href="#ability">我们的能力</a>
+      <a href="#projects">我们的项目</a>
+      <a href="#story">我们的故事</a>
+      <a href="#future">未来想象</a>
+      <a href="#blog">诸元博客</a>
+      <a href="#quotes">诸元语录</a>
+      <a href="#join">加入我们</a>
+      <a href="#contact">联系</a>
+    </nav>
+  </header>
+  <main>
+    <section class="main-hero" id="home">
+      <div class="gta-title">
+        <span class="line">诸元数智</span><br>
+        <span class="line">Xscape Studio</span>
+      </div>
+      <div class="hero-slogan">
+        年轻人的数智实验室｜有温度的数智服务<br>
+        <b>我们不是“打印铺”，我们是校园成长模型的共同建造者。</b>
+      </div>
+      </section>
+
+    <section id="why" style="display: flex; align-items: center; gap:2.3em; flex-wrap:wrap;">
+      <div style="flex:2; min-width:280px;">
+        <h2>我们信仰什么？</h2>
+        <div style="font-size:1.13em; line-height:1.8; color:#efe7ff; margin-bottom:1.2em;">
+          <b>「诸元数智」不是一个产品，是一种组织实验。</b><br>
+          <ul style="margin-left:1.2em;">
+            <li>我们相信：<b>学生自组织</b>也能做到专业、协作、温度并存。</li>
+            <li>我们反对一切无效内卷、伪创新、无边界的打工。</li>
+            <li>我们相信「创造」比「成功」重要，<b>过程感比结果更酷</b>。</li>
+            <li>我们喜欢把小事做精，让细节有温度、让效率变成习惯。</li>
+            <li>我们愿意承认自己的稚嫩，但也相信世界会奖励那些试图让一切变得更好的人。</li>
+          </ul>
+          <b>这不是一群“打工仔”，而是一群“实验者”。</b>
+          <br>——你也可以是其中一员。
+        </div>
+      </div>
+      <div class="section-icon">💡</div> </section>
+
+    <section id="ability" style="margin-top:3.8em;">
+      <h2>我们擅长什么？</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 1.8em; justify-content: space-between; align-items: flex-start;">
+        <div style="flex:1; min-width:280px;">
+          <ul style="font-size:1.06em; color:#e2dcf2;line-height:2;">
+            <li><b>数据文档处理</b>：PDF整合、批量打印、自动排版</li>
+            <li><b>AI赋能</b>：智能降重、ChatGPT辅导、AI美化、代码批量跑图</li>
+            <li><b>设计创意</b>：纪念卡/海报定制、黑白极简、潮流风格皆可</li>
+            <li>文案与排版：PPT包装、作业美化、公众号推文</li>
+            <li>信息协作：需求对接、项目制运营、线上线下混合式支持</li>
+            <li>活动策划：竞赛、宣传、社群裂变、校园调研</li>
+          </ul>
+          <div style="margin:1.5em 0;color:var(--accent);font-weight:bold;"> 总结：我们不只是“会做”，我们会做得比你想象的更快、更新、更有趣。
+          </div>
+        </div>
+        <div class="section-icon">🛠️</div> </div>
+    </section>
+
+     <section id="projects">
+        <h2>我们的项目</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="https://via.placeholder.com/400x200" alt="项目一封面">
+                <h3>项目名称：校园打印优化</h3>
+                <p>通过数据分析和流程优化，我们成功提升了校园打印服务的效率，用户满意度显著提高。</p>
+                <a href="#" class="card-link">了解更多</a>
+            </div>
+            <div class="project-card">
+                 <img src="https://via.placeholder.com/400x200" alt="项目二封面">
+                <h3>项目名称：AI文案助手</h3>
+                <p>开发了一款基于AI的文案生成工具，帮助同学快速撰写文章、报告和创意内容。</p>
+                <a href="#" class="card-link">了解更多</a>
+            </div>
+             <div class="project-card">
+                 <img src="https://via.placeholder.com/400x200" alt="项目三封面">
+                <h3>项目名称：主题纪念品设计</h3>
+                <p>为校园活动设计并制作了一系列创意纪念品，深受同学喜爱，成功提升了活动影响力。</p>
+                <a href="#" class="card-link">了解更多</a>
+            </div>
+            </div>
+    </section>
+
+
+    <section id="story" style="margin-top:3.5em;">
+      <h2>我们做过什么好玩的事？</h2>
+      <div style="display:flex;gap:2.5em;align-items:center;flex-wrap:wrap;">
+        <div class="section-icon">🎉</div> <div style="flex:2;min-width:280px;">
+          <ul style="color:#e2e6fc;font-size:1.06em;line-height:2;">
+            <li>从0开始搭建打印铺，首次突破百人用户，把“口碑”玩成了校园趣事。</li>
+            <li>自制纪念小卡，扫寝送卡片，顺便带活朋友圈“晒单返现”活动。</li>
+            <li>跨院对接学长学姐资源，首次拿下广告单，合力做了全校首个“扫寝调研”。</li>
+            <li>办了两次活动宣传，三次小型抽奖，甚至和老师合力“内测小程序”。</li>
+            <li>没有大厂背景，只有一腔“敢于试错”的热情，每次聚会都是一次小型创业沙龙。</li>
+          </ul>
+          <div style="color:var(--accent);font-weight:bold;margin-top:.8em;"> 有人说：我们是“校园版初创公司”，<br>
+            其实我们更像“玩闹里长大的产品经理”。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="future" style="margin-top:3.5em;">
+      <h2>我们想去的未来</h2>
+      <div style="display:flex;align-items:center;gap:2.3em;flex-wrap:wrap;">
+        <div style="flex:1.4;min-width:280px;">
+          <div style="color:#ececec;font-size:1.12em;line-height:2;">
+            <b>我们不想一直做“打印铺”，更想成为一群数字组织的发明者。</b><br>
+            <ul style="margin-left:1.2em;">
+              <li>用AI和自动化降低学生的试错成本</li>
+              <li>让每个人都能做出自己的“专属工具箱”</li>
+              <li>用小程序/机器人/定制网站，把枯燥的文档流程变成像玩游戏一样的体验</li>
+              <li>未来想试水“量化社群”、“校园知识星球”、“低门槛AI孵化平台”</li>
+            </ul>
+            <span style="color:var(--accent);font-weight:bold;">我们最大的理想，是让“组织”也变成一门可以自学的手艺。</span> </div>
+        </div>
+        <div class="section-icon">🚀</div> </div>
+    </section>
+
+    <section id="blog">
+        <h2>诸元博客</h2>
+        <div class="blog-grid">
+            <div class="blog-post-card">
+                <h3>如何利用ChatGPT提高学习效率？</h3>
+                <p class="date">发布日期：2024年10月26日</p>
+                <p>分享我们工作室成员使用ChatGPT的经验和技巧，帮助你在学业上事半功倍。</p>
+                <a href="#" class="card-link">阅读全文</a>
+            </div>
+             <div class="blog-post-card">
+                <h3>从零开始搭建你的第一个自动化工具</h3>
+                <p class="date">发布日期：2024年10月20日</p>
+                <p>手把手教你使用Python或其他工具，解决生活中的小问题，入门自动化。</p>
+                <a href="#" class="card-link">阅读全文</a>
+            </div>
+             <div class="blog-post-card">
+                <h3>创意设计：让你的作业耳目一新</h3>
+                <p class="date">发布日期：2024年10月15日</p>
+                <p>分享排版、配色和视觉设计的入门知识，让你的PPT、文档不再单调。</p>
+                <a href="#" class="card-link">阅读全文</a>
+            </div>
+            </div>
+    </section>
+
+
+    <section id="quotes" style="margin-top:3.5em;text-align:center;">
+      <h2>诸元语录</h2>
+      <div id="quoteBox">
+        <i>“我们没什么伟大梦想，但想在平凡中留下自己的注脚。”</i>
+      </div>
+      <button onclick="changeQuote()">换一句</button>
+    </section>
+    <script>
+      const quotes = [
+        "“我们没什么伟大梦想，但想在平凡中留下自己的注脚。”",
+        "“所有伟大的项目，都是从寝室床上躺出来的。”",
+        "“组织不是命令，而是把朋友变成合伙人。”",
+        "“如果你觉得太难了，那你已经赢过90%的同龄人。”",
+        "“没必要凡事高大上，先把能用的事做精。”",
+        "“我们就是普通人，但我们很认真。”",
+        "“别跟自己死磕完美，能推进的都是生产力。”",
+        "“最怕自以为清醒，其实大家都一头雾水。”",
+        "“下一个100单，不靠爆单，靠大家一起卷。”",
+        "“ AI是工具，创意才是灵魂。”", /* Added new quotes */
+        "“ 代码不只是逻辑，也是一种表达方式。”",
+        "“ 在诸元，你可以大胆试错，因为有我们一起抗。”"
+      ];
+
+      function changeQuote() {
+        const box = document.getElementById('quoteBox');
+        box.classList.add('quote-fade');
+        setTimeout(() => {
+          let q = quotes[Math.floor(Math.random() * quotes.length)];
+          box.innerHTML = "<i>" + q + "</i>";
+          box.classList.remove('quote-fade');
+        }, 400); // Adjusted duration
+      }
+    </script>
+
+     <section id="join" style="text-align: center;">
+         <h2>加入我们</h2>
+         <div class="join-card" style="max-width: 600px; margin: 0 auto;">
+             <img src="https://via.placeholder.com/200x150" alt="加入我们插图">
+             <h3>想成为诸元的一员吗？</h3>
+             <p>我们正在寻找热爱创造、勇于实验的年轻人。无论你是技术大牛、设计鬼才，还是创意无限的文案达人，只要你对“有温度的数智服务”充满热情，就来和我们聊聊吧！</p>
+             <p style="color:var(--accent); font-weight: bold;">在这里，你将有机会：</p>
+             <ul style="text-align: left; max-width: 300px; margin: 1em auto;">
+                 <li>参与真实项目，提升实战能力</li>
+                 <li>学习前沿的AI和自动化技术</li>
+                 <li>和一群志同道合的伙伴一起成长</li>
+                 <li>共同定义校园数智服务的未来</li>
+             </ul>
+              <a href="#contact" class="card-link">联系我们了解详情</a>
+         </div>
+    </section>
+
+
+    <section id="contact" style="margin-top:3.5em; text-align:center;">
+      <h2>联系我们</h2>
+      <div style="font-size:1.13em;color:#e9e9ff;margin-bottom:1.6em;">
+        想定制专属服务、合作交流、加入我们，或只是聊聊天，随时欢迎敲门！
+      </div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div>📱</div>
+          <div>微信</div>
+          <div>Feiboss2004</div>
+        </div>
+        <div class="contact-item">
+          <div>💬</div>
+          <div>QQ</div>
+          <div>1228486648</div>
+        </div>
+        <div class="contact-item">
+          <div>📞</div>
+          <div>电话</div>
+          <div>18152123584</div>
+        </div>
+        <div class="contact-item">
+          <div>📍</div>
+          <div>地址</div>
+          <div>九江学院32栋218</div>
+        </div>
+      </div>
+      <div class="contact-message">
+        <i>我们不是等你“投简历”，<br>
+          我们等你一起写未来。</i>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 诸元数智 Xscape Studio | 校园先锋团队，与你一起「创造不止」<br>
+    </footer>
+    <script>
+      const tips = [
+        "诸元提醒：凌晨打印前请关好窗户。",
+        "诸元语录：做不到100分，但可以做到下一步。",
+        "别怕被说“卷”，你卷起来就是团队主力！",
+        "诸元小建议：今日不想干活，可以来聊聊AI新脑洞。",
+        "找灵感？看看我们最新的博客文章吧！", /* Added new tips */
+        "有好的项目想法？来和我们一起实现！"
+      ];
+      setInterval(() => {
+        let f = document.querySelector('footer');
+        if (!f) return;
+        const originalText = "&copy; 2025 诸元数智 Xscape Studio | 校园先锋团队，与你一起「创造不止」";
+        f.innerHTML = originalText + "<br>" + tips[Math.floor(Math.random() * tips.length)];
+      }, 7000); // Slightly faster tip change
+    </script>
+
+  </main>
+</body>
+</html>
